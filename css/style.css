@@ -1,0 +1,207 @@
+/* Скидання стилів */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #121212; /* Темна тема */
+    color: #ffffff;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* Header */
+.header {
+    background-color: #1f1f1f;
+    padding: 15px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 50;
+    border-bottom: 2px solid #ff0000; /* Червоний акцент Tokyo Ghoul */
+}
+
+.header__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem; /* Відносні одиниці  */
+    font-weight: bold;
+    color: #ff0000;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.menu__list {
+    display: flex;
+    list-style: none;
+}
+
+.menu__link {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    transition: color 0.3s ease; /* Анімація переходу  */
+}
+
+.menu__link:hover {
+    color: #ff0000; /* Ховер ефект  */
+}
+
+.menu__icon {
+    display: none; /* Ховаємо бургер на десктопі */
+}
+
+/* Main Content */
+.main {
+    margin-top: 80px; /* Відступ під фіксований хедер */
+}
+
+.hero {
+    text-align: center;
+    padding: 100px 0;
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://placehold.co/1920x600/111/red'); /* Заглушка фону */
+    background-size: cover;
+}
+
+.hero__title {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 30px;
+    background-color: #ff0000;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    transition: transform 0.2s;
+}
+
+.btn:hover {
+    transform: scale(1.05); /* Ефект збільшення */
+}
+
+/* Адаптивна сітка карток  */
+.features {
+    padding: 50px 0;
+}
+
+.features h2 {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.features__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 колонки на десктопі */
+    gap: 20px;
+}
+
+.card {
+    background-color: #1f1f1f;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #333;
+    text-align: center;
+}
+
+/* Footer */
+.footer {
+    background-color: #000;
+    padding: 20px 0;
+    text-align: center;
+    color: #888;
+}
+
+/* --- МЕДІА-ЗАПИТИ (ADAPTIVE) [cite: 138, 173] --- */
+
+/* Планшети (менше 768px) */
+@media (max-width: 768px) {
+    .features__grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 колонки */
+    }
+
+    body {
+        font-size: 14px; /* Зменшення шрифту */
+    }
+
+    /* Бургер-меню */
+    .menu__icon {
+        display: block;
+        z-index: 5;
+        position: relative;
+        width: 30px;
+        height: 18px;
+        cursor: pointer;
+    }
+
+    .menu__icon span,
+    .menu__icon::before,
+    .menu__icon::after {
+        left: 0;
+        position: absolute;
+        height: 10%;
+        width: 100%;
+        transition: all 0.3s ease;
+        background-color: #fff;
+    }
+
+    .menu__icon::before,
+    .menu__icon::after {
+        content: "";
+    }
+
+    .menu__icon::before { top: 0; }
+    .menu__icon::after { bottom: 0; }
+    .menu__icon span { top: 50%; transform: scale(1) translate(0px, -50%); }
+
+    .menu__body {
+        position: fixed;
+        top: 0;
+        left: -100%; /* Меню сховане зліва */
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.95);
+        padding: 100px 30px 30px 30px;
+        transition: left 0.3s ease; /* Плавне відкриття  */
+    }
+
+    .menu__body.active {
+        left: 0; /* Меню виїжджає */
+    }
+
+    .menu__list {
+        flex-direction: column;
+    }
+
+    .menu__link {
+        margin: 0 0 20px 0;
+        font-size: 24px;
+        display: block;
+    }
+}
+
+/* Смартфони (менше 480px)  */
+@media (max-width: 480px) {
+    .features__grid {
+        grid-template-columns: 1fr; /* 1 колонка */
+    }
+    
+    .hero__title {
+        font-size: 2rem;
+    }
+}
