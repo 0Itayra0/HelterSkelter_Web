@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container header__container">
+            <a href="#" class="logo">ADMIN PANEL</a>
+            <nav class="menu__body">
+                <ul class="menu__list">
+                    <li><a href="index.html" class="menu__link">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <section class="container admin-panel">
+            <div class="crud-header">
+                <h2>User Management</h2>
+                <button class="btn">Create New User</button>
+            </div>
+
+            <div class="table-responsive">
+                <table class="crud-table">
+                    <thead>
+                        <tr>
+                            <th>Discord ID</th>
+                            <th>Username</th>
+                            <th>Balance</th>
+                            <th>Rank</th>
+                            <th>Actions (CRUD)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>9384...123</td>
+                            <td>Yoshimura</td>
+                            <td>5,000</td>
+                            <td><span class="badge badge-sss">SSS</span></td>
+                            <td>
+                                <button class="action-btn btn-edit">Edit</button>
+                                <button class="action-btn btn-delete">Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>1122...334</td>
+                            <td>Test1</td>
+                            <td>120</td>
+                            <td><span class="badge badge-c">C-Rank</span></td>
+                            <td>
+                                <button class="action-btn btn-edit">Edit</button>
+                                <button class="action-btn btn-delete">Delete</button>
+                            </td>
+                        </tr>
+                         <tr>
+                            <td>5566...778</td>
+                            <td>Test2</td>
+                            <td>800</td>
+                            <td><span class="badge badge-a">A-Rank</span></td>
+                            <td>
+                                <button class="action-btn btn-edit">Edit</button>
+                                <button class="action-btn btn-delete">Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - Helter Skelter</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container header__container">
+            <a href="index.html" class="logo">Helter Skelter</a>
+            <nav class="menu__body">
+                <ul class="menu__list">
+                    <li><span class="menu__link">Balance: 1,540 V</span></li>
+                    <li><a href="index.html" class="menu__link">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <section class="container" style="padding-top: 120px;">
+            <h2>My Profile</h2>
+            <div class="features__grid" style="margin-top: 30px;">
+                <div class="card">
+                    <h3>User Info</h3>
+                    <p><strong>Name:</strong> UserTest</p>
+                    <p><strong>Rank:</strong> <span class="badge badge-sss">SSS Rated</span></p>
+                    <p><strong>Joined:</strong> 12.12.2025</p>
+                </div>
+                <div class="card">
+                    <h3>Stats</h3>
+                    <p><strong>Vouches:</strong> 1,540</p>
+                    <p><strong>Transactions:</strong> 42</p>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 50px;">Recent Transactions</h3>
+            <div class="table-responsive" style="margin-top: 20px;">
+                <table class="crud-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Type</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>2026-02-01</td>
+                            <td>PvE Reward</td>
+                            <td style="color: #0f0;">+50</td>
+                            <td>Completed</td>
+                        </tr>
+                        <tr>
+                            <td>2026-01-28</td>
+                            <td>Transfer to @Itayra</td>
+                            <td style="color: #f00;">-200</td>
+                            <td>Sent</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
