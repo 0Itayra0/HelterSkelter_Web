@@ -207,3 +207,119 @@ body {
         font-size: 2rem;
     }
 }
+
+/* --- СТИЛІ ДЛЯ ПР №3 (LOGIN & ADMIN) --- */
+
+/* Форма входу */
+.auth-section {
+    padding: 100px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+}
+
+.auth-form {
+    background-color: #1f1f1f;
+    padding: 40px;
+    border-radius: 8px;
+    border: 1px solid #ff0000;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
+}
+
+.auth-form h2 {
+    margin-bottom: 30px;
+    color: #ff0000;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #aaa;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    background-color: #121212;
+    border: 1px solid #333;
+    color: #fff;
+    border-radius: 4px;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #ff0000;
+}
+
+/* Таблиці (CRUD інтерфейс) */
+.admin-panel {
+    padding: 120px 0 50px 0;
+}
+
+.crud-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.table-responsive {
+    overflow-x: auto;
+}
+
+.crud-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #1f1f1f;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.crud-table th, .crud-table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #333;
+}
+
+.crud-table th {
+    background-color: #ff0000;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
+
+.crud-table tr:hover {
+    background-color: #2a2a2a;
+}
+
+/* Статуси та кнопки дій */
+.badge {
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+.badge-sss { background-color: #ff0000; color: white; }
+.badge-a { background-color: #ffa500; color: black; }
+.badge-c { background-color: #888; color: white; }
+
+.action-btn {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    margin-right: 5px;
+    text-decoration: none;
+}
+.btn-edit { background-color: #2196F3; color: white; }
+.btn-delete { background-color: #f44336; color: white; }
