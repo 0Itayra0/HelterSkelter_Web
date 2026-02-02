@@ -71,8 +71,10 @@ body {
 .hero {
     text-align: center;
     padding: 100px 0;
-    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://placehold.co/1920x600/111/red'); /* Заглушка фону */
+    /* Зверни увагу на дві крапки на початку шляху! Це вихід з папки css */
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('../assets/img/logo.png');
     background-size: cover;
+    background-position: center; /* Додай це, щоб картинка центрувалася */
 }
 
 .hero__title {
