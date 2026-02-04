@@ -12,8 +12,8 @@
             <a href="index.html" class="logo">Helter Skelter</a>
             <nav class="menu__body">
                 <ul class="menu__list">
-                    <li><span class="menu__link">Balance: 1,540 V</span></li>
-                    <li><a href="index.html" class="menu__link">Logout</a></li>
+                    <li><span class="menu__link">Balance: <span id="header-balance">...</span> V</span></li>
+                    <li><a href="#" id="logoutBtn" class="menu__link">Logout</a></li>
                 </ul>
             </nav>
         </div>
@@ -25,14 +25,18 @@
             <div class="features__grid" style="margin-top: 30px;">
                 <div class="card">
                     <h3>User Info</h3>
-                    <p><strong>Name:</strong> UserTest</p>
-                    <p><strong>Rank:</strong> <span class="badge badge-sss">SSS Rated</span></p>
+                    <p><strong>Name:</strong> <span id="profile-name">Loading...</span></p>
+                    
+                    <p><strong>Rank:</strong> <span id="profile-rank" class="badge badge-sss">...</span></p>
+                    
+                    <p><strong>Role:</strong> <span id="profile-role">...</span></p>
+                    
                     <p><strong>Joined:</strong> 12.12.2025</p>
                 </div>
                 <div class="card">
                     <h3>Stats</h3>
-                    <p><strong>Vouches:</strong> 1,540</p>
-                    <p><strong>Transactions:</strong> 42</p>
+                    <p><strong>Vouches:</strong> <span id="profile-balance">...</span></p>
+                    <p><strong>Transactions:</strong> 2</p>
                 </div>
             </div>
 
@@ -65,5 +69,7 @@
             </div>
         </section>
     </main>
+
+    <script src="js/script.js"></script>
 </body>
 </html>

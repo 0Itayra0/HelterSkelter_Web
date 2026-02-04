@@ -17,23 +17,27 @@
         <section class="auth-section">
             <div class="auth-form">
                 <h2>Member Login</h2>
-                <form id="loginForm">
+                
+                <form id="loginForm" onsubmit="handleLogin(event)">
                     <div class="form-group">
                         <label>Discord ID / Username</label>
-                        <input type="text" class="form-control" placeholder="Enter your ID" required>
+                        <input type="text" id="username" class="form-control" placeholder="Enter your username" required>
                     </div>
                     <div class="form-group">
                         <label>Password</label>
-                        <input type="password" class="form-control" placeholder="••••••••" required>
+                        <input type="password" id="password" class="form-control" placeholder="••••••••" required>
                     </div>
+                    
                     <button type="submit" class="btn" style="width: 100%;">Sign In</button>
-                    <p style="margin-top: 15px; color: #666; font-size: 0.9rem;">
-                        <a href="admin.html" style="color: #444;">(Demo: Admin Panel)</a> | 
-                        <a href="profile.html" style="color: #444;">(Demo: User Profile)</a>
+                    
+                    <p id="errorMsg" style="color: #ff0000; margin-top: 15px; display: none; font-size: 0.9rem;">
+                        Invalid username or password
                     </p>
                 </form>
             </div>
         </section>
     </main>
+
+    <script src="js/script.js"></script>
 </body>
 </html>

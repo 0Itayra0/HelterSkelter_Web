@@ -1,16 +1,97 @@
-// Головна URL API
 const API_URL = 'http://localhost:3000/api/users';
+const LOGIN_URL = 'http://localhost:3000/api/login';
+const PROFILE_URL = 'http://localhost:3000/api/profile'; // Маршрут профілю
 
-// 1. READ: Завантаження даних
+// --- AUTHENTICATION (Вхід) ---
+async function handleLogin(event) {
+    event.preventDefault(); 
+    
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    const errorMsg = document.getElementById('errorMsg');
+
+    try {
+        const response = await fetch(LOGIN_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, password })
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            // Зберігає токен
+            localStorage.setItem('token', data.token);
+            
+            // Перенаправлення залежно від ролі
+            if (data.role === 'admin') {
+                window.location.href = 'admin.html';
+            } else {
+                window.location.href = 'profile.html';
+            }
+        } else {
+            errorMsg.style.display = 'block';
+        }
+    } catch (error) {
+        console.error('Login error:', error);
+    }
+}
+
+// Функція для отримання заголовків з токеном
+function getAuthHeaders() {
+    const token = localStorage.getItem('token');
+    return {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+    };
+}
+
+// --- PROFILE LOGIC (НОВЕ: Завантаження даних профілю) ---
+async function loadProfile() {
+    try {
+        const response = await fetch(PROFILE_URL, {
+            headers: getAuthHeaders() // Відправляємо токен, щоб сервер впізнав юзера
+        });
+
+        if (response.ok) {
+            const user = await response.json();
+            
+            // Заповнюємо HTML реальними даними
+            // Перевіряємо чи існують елементи, щоб уникнути помилок
+            if(document.getElementById('header-balance')) 
+                document.getElementById('header-balance').innerText = user.balance;
+            
+            if(document.getElementById('profile-name'))
+                document.getElementById('profile-name').innerText = user.username;
+            
+            if(document.getElementById('profile-rank'))
+                document.getElementById('profile-rank').innerText = user.game_rank;
+            
+            if(document.getElementById('profile-role'))
+                document.getElementById('profile-role').innerText = user.role;
+            
+            if(document.getElementById('profile-balance'))
+                document.getElementById('profile-balance').innerText = user.balance;
+
+        } else {
+            // Якщо токен недійсний - на логін
+            window.location.href = 'login.html';
+        }
+    } catch (error) {
+        console.error('Error loading profile:', error);
+    }
+}
+
+// --- ADMIN PANEL LOGIC ---
+
 async function loadUsers() {
     try {
-        const response = await fetch(API_URL);
+        const response = await fetch(API_URL); // GET запит публічний
         const users = await response.json();
         
         const tableBody = document.querySelector('.crud-table tbody');
-        if (!tableBody) return; // Якщо ми не на сторінці адміна
+        if (!tableBody) return; 
 
-        tableBody.innerHTML = ''; // Очистити таблицю
+        tableBody.innerHTML = ''; 
 
         users.forEach(user => {
             const row = `
@@ -20,7 +101,7 @@ async function loadUsers() {
                     <td>${user.balance}</td>
                     <td><span class="badge badge-sss">${user.game_rank}</span></td>
                     <td>
-                        <button onclick="editUser('${user.discord_id}')" class="action-btn btn-edit">Edit Balance</button>
+                        <button onclick="editUser('${user.discord_id}')" class="action-btn btn-edit">Edit</button>
                         <button onclick="deleteUser('${user.discord_id}')" class="action-btn btn-delete">Delete</button>
                     </td>
                 </tr>
@@ -28,59 +109,83 @@ async function loadUsers() {
             tableBody.innerHTML += row;
         });
     } catch (error) {
-        console.error('Error loading users:', error);
+        console.error('Error:', error);
     }
 }
 
-// 2. CREATE: Робимо функцію глобальною
+// Глобальні функції (Create/Edit/Delete) тепер надсилають ТОКЕН
 window.createUser = async function() {
     const username = prompt("Enter Username:");
     if (!username) return;
-    
-    const balance = prompt("Enter Initial Balance:", "0");
-    if (balance === null) return;
+    const balance = prompt("Balance:", "0");
 
-    await fetch(API_URL, {
+    const response = await fetch(API_URL, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ 
-            username: username, 
-            balance: balance 
-        })
+        headers: getAuthHeaders(),
+        body: JSON.stringify({ username, balance })
     });
-    
-    loadUsers(); 
+
+    if (response.status === 403) alert("Access Denied: Admins Only!");
+    else loadUsers();
 }
 
-// 3. UPDATE: Робимо функцію глобальною
 window.editUser = async function(id) {
-    const newBalance = prompt("Enter new balance:");
-    if (newBalance === null) return;
+    const newBalance = prompt("New balance:");
+    if (!newBalance) return;
 
-    await fetch(`${API_URL}/${id}`, {
+    const response = await fetch(`${API_URL}/${id}`, {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
+        headers: getAuthHeaders(),
         body: JSON.stringify({ balance: newBalance })
     });
 
-    loadUsers(); 
+    if (response.status === 403) alert("Access Denied: Admins Only!");
+    else loadUsers(); 
 }
 
-// 4. DELETE: Робимо функцію глобальною
 window.deleteUser = async function(id) {
-    if (!confirm("Are you sure you want to delete this user?")) return;
+    if (!confirm("Are you sure?")) return;
 
-    await fetch(`${API_URL}/${id}`, {
-        method: 'DELETE'
+    const response = await fetch(`${API_URL}/${id}`, {
+        method: 'DELETE',
+        headers: getAuthHeaders()
     });
 
-    loadUsers(); 
+    if (response.status === 403) alert("Access Denied: Admins Only!");
+    else loadUsers(); 
 }
 
-// Запуск при завантаженні сторінки
+// Logout
+function logout() {
+    localStorage.removeItem('token');
+    window.location.href = 'login.html';
+}
+
+// --- ГОЛОВНИЙ ЗАПУСК ---
 document.addEventListener('DOMContentLoaded', () => {
-    // Перевіряємо, чи ми на адмін-панелі
+    
+    // 1. Логіка для АДМІН
     if (document.querySelector('.admin-panel')) {
+        if (!localStorage.getItem('token')) {
+            window.location.href = 'login.html';
+        }
         loadUsers();
+    }
+    
+    // 2. Логіка для ПРОФІЛЮ
+    if (document.getElementById('profile-name')) {
+        if (!localStorage.getItem('token')) {
+            window.location.href = 'login.html';
+        }
+        loadProfile();
+    }
+
+    // 3. Універсальна кнопка Logout
+    const logoutBtn = document.getElementById('logoutBtn') || document.querySelector('a[href="index.html"]');
+    if(logoutBtn) {
+        logoutBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            logout();
+        });
     }
 });
