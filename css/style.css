@@ -18,7 +18,6 @@ body {
     padding: 0 15px;
 }
 
-/* Header */
 .header {
     background-color: #1f1f1f;
     padding: 15px 0;
@@ -26,7 +25,7 @@ body {
     width: 100%;
     top: 0;
     z-index: 50;
-    border-bottom: 2px solid #ff0000; /* Червоний акцент Tokyo Ghoul */
+    border-bottom: 2px solid #ff0000; /* Червоний акцент */
 }
 
 .header__container {
@@ -65,16 +64,15 @@ body {
 
 /* Main Content */
 .main {
-    margin-top: 80px; /* Відступ під фіксований хедер */
+    margin-top: 80px; /* Відступ під фіксований header */
 }
 
 .hero {
     text-align: center;
     padding: 100px 0;
-    /* Зверни увагу на дві крапки на початку шляху! Це вихід з папки css */
     background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('../assets/img/logo.png');
     background-size: cover;
-    background-position: center; /* Додай це, щоб картинка центрувалася */
+    background-position: center; 
 }
 
 .hero__title {
@@ -121,7 +119,6 @@ body {
     text-align: center;
 }
 
-/* Footer */
 .footer {
     background-color: #000;
     padding: 20px 0;
@@ -129,7 +126,7 @@ body {
     color: #888;
 }
 
-/* --- МЕДІА-ЗАПИТИ (ADAPTIVE) [cite: 138, 173] --- */
+/* --- МЕДІА-ЗАПИТИ (ADAPTIVE) */
 
 /* Планшети (менше 768px) */
 @media (max-width: 768px) {

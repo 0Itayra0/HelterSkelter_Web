@@ -1,8 +1,9 @@
+// --- APIS ---
 const API_URL = 'http://localhost:3000/api/users';
 const LOGIN_URL = 'http://localhost:3000/api/login';
-const PROFILE_URL = 'http://localhost:3000/api/profile'; // Маршрут профілю
+const PROFILE_URL = 'http://localhost:3000/api/profile';
 
-// --- AUTHENTICATION (Вхід) ---
+// --- AUTHENTICATION  ---
 async function handleLogin(event) {
     event.preventDefault(); 
     
@@ -55,8 +56,7 @@ async function loadProfile() {
         if (response.ok) {
             const user = await response.json();
             
-            // Заповнюємо HTML реальними даними
-            // Перевіряємо чи існують елементи, щоб уникнути помилок
+            // Перевіряє чи існують елементи, щоб уникнути помилок
             if(document.getElementById('header-balance')) 
                 document.getElementById('header-balance').innerText = user.balance;
             
@@ -113,7 +113,7 @@ async function loadUsers() {
     }
 }
 
-// Глобальні функції (Create/Edit/Delete) тепер надсилають ТОКЕН
+// Глобальні функції (Create/Edit/Delete) надсилають ТОКЕН
 window.createUser = async function() {
     const username = prompt("Enter Username:");
     if (!username) return;
@@ -164,7 +164,7 @@ function logout() {
 // --- ГОЛОВНИЙ ЗАПУСК ---
 document.addEventListener('DOMContentLoaded', () => {
     
-    // 1. Логіка для АДМІН
+    // 1. Логіка для ADMIN
     if (document.querySelector('.admin-panel')) {
         if (!localStorage.getItem('token')) {
             window.location.href = 'login.html';
@@ -172,7 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
         loadUsers();
     }
     
-    // 2. Логіка для ПРОФІЛЮ
+    // 2. Логіка для PROFILE
     if (document.getElementById('profile-name')) {
         if (!localStorage.getItem('token')) {
             window.location.href = 'login.html';

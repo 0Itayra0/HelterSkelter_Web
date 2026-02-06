@@ -56,7 +56,7 @@ app.post('/api/login', (req, res) => {
 
 // 2. PROFILE
 app.get('/api/profile', authenticateToken, (req, res) => {
-    // Шукаємо користувача по імені з токена
+    // Шукає користувача по імені з токена
     const user = usersDB.find(u => u.username === req.user.username);
     if (user) {
         res.json(user); // Віддає всю інфу (баланс, ранг...)
