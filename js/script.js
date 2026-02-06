@@ -45,11 +45,11 @@ function getAuthHeaders() {
     };
 }
 
-// --- PROFILE LOGIC (НОВЕ: Завантаження даних профілю) ---
+// --- PROFILE LOGIC ---
 async function loadProfile() {
     try {
         const response = await fetch(PROFILE_URL, {
-            headers: getAuthHeaders() // Відправляємо токен, щоб сервер впізнав юзера
+            headers: getAuthHeaders() 
         });
 
         if (response.ok) {
